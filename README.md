@@ -1,8 +1,5 @@
 # AdaptiveViT
----
 AdaptiveViT is a hybrid CNN-Vision Transformer model designed for medical image classification under severe class imbalance. It introduces three tightly coupled components that together allow the model to *learn how imbalanced its training data is* and continuously adapt its feature extraction and loss computation accordingly — without any per-dataset manual tuning.
-
----
 
 ## Datasets
 
@@ -79,12 +76,31 @@ CUDA_VISIBLE_DEVICES=0 python train.py \
     --n-epochs 30 \
     --seed 0 \
     --rho-strategy per_class_avg \
-    --model-dir ./weights \
-    --log-dir ./logs
+    --model-dir ./checkpoints/weights \
+    --log-dir ./checkpoints/logs
 ```
 
 > **Note:** `imbalance_ratio` is passed as a keyword argument and is therefore *not* automatically scattered by DataParallel. The model's `forward()` slices it to the correct sub-batch size on each device.
-> 
+
+## Evaluation
+
+```bash
+python predict_hipervit_v2.py \
+    --kernel-type adaptivevit_dataset_name \
+    --data-dir /path/to/dataset \
+    --dataset dataset_name \
+    --image-size 224 \
+    --enet-type efficientnet_b0 \
+    --out-dim 2 \
+    --n-test 8 \
+    --seed 0 \
+    --rho-strategy per_class_avg \
+    --model-dir ./checkpoints/weights \
+    --sub-dir ./checkpoints/subs
+```
+
+> The script reports: **Accuracy**, **Precision**, **Recall**, **F1**, **ROC-AUC**, **Confusion Matrix**, and **Per-class Accuracy**.
+
 ### Key training arguments
 
 | Argument | Description | Default |
@@ -108,35 +124,4 @@ CUDA_VISIBLE_DEVICES=0 python train.py \
 | `minmax` | log(n_min / n_max) | Global severity signal |
 | `tail_head` | log(n_tail / n_head) | Maximum contrast; most aggressive |
 
-### DALoss gamma
 
-γ is derived automatically from ρ via `calculate_gamma()` in `data_module.py` — no per-dataset manual tuning is required:
-
-```
-γ₋ = γ_min + (γ_max − γ_min) · |tanh(ρ̄)|
-
-γ_min = 0.5   (prevents collapse to standard cross-entropy when balanced)
-γ_max = 5.0   (prevents precision collapse under extreme imbalance)
-```
-
----
-
-## Evaluation
-
-```bash
-python predict_hipervit_v2.py \
-    --kernel-type adaptivevit_isic2017 \
-    --data-dir /path/to/isic2017 \
-    --dataset ISIC2017 \
-    --image-size 224 \
-    --enet-type efficientnet_b0 \
-    --out-dim 2 \
-    --n-test 8 \
-    --seed 0 \
-    --rho-strategy per_class_avg \
-    --config configs/architecture.yaml \
-    --model-dir ./weights \
-    --sub-dir ./subs
-```
-
-The script reports: **Accuracy**, **Precision**, **Recall**, **F1**, **ROC-AUC**, **Confusion Matrix**, and **Per-class Accuracy**.
