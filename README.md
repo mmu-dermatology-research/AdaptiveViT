@@ -85,7 +85,7 @@ CUDA_VISIBLE_DEVICES=0 python train.py \
 ## Evaluation
 
 ```bash
-python predict_hipervit_v2.py \
+CUDA_VISIBLE_DEVICES=0 python predict.py \
     --kernel-type adaptivevit_dataset_name \
     --data-dir /path/to/dataset \
     --dataset dataset_name \
