@@ -1,9 +1,9 @@
 # AdaptiveViT
-AdaptiveViT is a hybrid CNN-Vision Transformer model designed for medical image classification under severe class imbalance. It introduces three tightly coupled components that together allow the model to *learn how imbalanced its training data is* and continuously adapt its feature extraction and loss computation accordingly — without any per-dataset manual tuning.
+AdaptiveViT is a hybrid CNN-Vision Transformer model designed for medical image classification under severe class imbalance and low-resolution image data.
 
 ## Datasets
 
-AdaptiveViT is evaluated across seven publicly available medical imaging benchmarks spanning skin lesion classification and endoscopy:
+AdaptiveViT is evaluated on publicly available medical imaging benchmarks, primarily for skin lesion classification, with an additional HyperKvasirUC endoscopy dataset used to assess its generalisation capability across imaging domains.
 
 | Dataset | Task (Binary or Multi-class) | Classes | Imbalance |
 |---|---|---|---|
