@@ -1,20 +1,5 @@
 # AdaptiveViT
-AdaptiveViT is a hybrid CNN-Vision Transformer model designed for medical image classification under severe class imbalance and low-resolution image data.
-
-## Datasets
-
-AdaptiveViT is evaluated on publicly available medical imaging benchmarks, primarily for skin lesion classification, with an additional HyperKvasirUC endoscopy dataset used to assess its generalisation capability across imaging domains.
-
-| Dataset | Task (Binary or Multi-class) | Classes | Imbalance |
-|---|---|---|---|
-| **ISIC 2017** | Skin lesion (binary / 3-class) | 2 or 3 | ~4.4:1 |
-| **ISIC 2024** | Skin lesion (binary) | 2 | ~9.7:1 |
-| **CBD-4905** | Melanoma detection | 2 | ~1:1 (balanced) |
-| **IMBD-9810** | Melanoma detection | 2 | ~1.7:1 |
-| **Derm7pt** | Dermoscopy / clinical (binary / 5-class) | 2 | ~3.6:1 |
-| **IBD-HKUC** | Ulcerative colitis (Mayo score) | 2 | ~5.4:1 |
-
----
+Adaptive Distribution-aware Vision Transformer, **AdaptiveViT** is a hybrid CNN-Vision Transformer model designed for medical image classification under severe class imbalance and low-resolution image data.
 
 ## Installation
 
@@ -36,7 +21,7 @@ pip install -r requirements.txt
 ```
 AdaptiveViT/
 ├── models/                     # model.py, imagenet.py
-│   ├── model.py
+│   ├── adaptivevit.py
 │   └── imagenet.py
 │
 ├── datasets/                   # all dataset_*.py files + data_module.py
@@ -46,7 +31,8 @@ AdaptiveViT/
 │   ├── dataset_isic2024.py
 │   ├── dataset_cbd4905.py
 │   ├── dataset_derm7pt.py
-│   └── dataset_ibd_hkuc.py
+│   ├── dataset_ibd_hkuc.py
+│   └── README.md                # dataset modules details
 │
 ├── config.yaml
 │
@@ -64,9 +50,9 @@ AdaptiveViT/
 
 ```bash
 CUDA_VISIBLE_DEVICES=0 python train.py \
-    --save-name adaptivevit_dataset_name \
+    --save-name adaptivevit_dataset_tag \
     --data-dir /path/to/dataset \
-    --dataset dataset_name \
+    --dataset dataset_tag \
     --image-size 224 \
     --enet-type efficientnet_b0 \
     --out-dim 2 \
@@ -86,9 +72,9 @@ CUDA_VISIBLE_DEVICES=0 python train.py \
 
 ```bash
 CUDA_VISIBLE_DEVICES=0 python predict.py \
-    --kernel-type adaptivevit_dataset_name \
+    --kernel-type adaptivevit_dataset_tag \
     --data-dir /path/to/dataset \
-    --dataset dataset_name \
+    --dataset dataset_tag \
     --image-size 224 \
     --enet-type efficientnet_b0 \
     --out-dim 2 \
@@ -125,3 +111,18 @@ CUDA_VISIBLE_DEVICES=0 python predict.py \
 | `tail_head` | log(n_tail / n_head) | Maximum contrast; most aggressive |
 
 
+## Datasets
+
+AdaptiveViT is evaluated on publicly available medical imaging benchmarks, primarily for skin lesion classification, with an additional HyperKvasirUC endoscopy dataset used to assess its generalisation capability across imaging domains.
+
+| Dataset| Tag | Task (Binary or Multi-class) | Classes | Imbalance |
+|---|---|---|---|---|
+| **ISIC 2017** | `ISIC2017` | Skin lesion (binary / 3-class) | 2 or 3 | ~4.4:1 |
+| **ISIC 2024** | `ISIC2024` | Skin lesion (binary) | 2 | ~9.7:1 |
+| **ISIC Balanced** | `CBD4905` | Melanoma detection | 2 | ~1:1 (balanced) |
+| **ISIC Imbalanced** | `IMBD9810` | A subset of ISIC-DICM-17K Melanoma detection | 2 | ~1.7:1 |
+| **Derm7pt** | `Derm7pt`, `Derm7ptClinic` | Dermoscopy / clinical (binary / 5-class) | 2 or 5 | ~3.6:1 |
+| **HyperKvasir UC** | `IBDHKUC` | Ulcerative colitis (Mayo score) | 2 | ~5.4:1 |
+
+---
+> **Note:** `datasets/README.md` for details description about dataset modules and common dataset module interface.
