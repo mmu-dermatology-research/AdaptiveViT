@@ -1,8 +1,12 @@
 # AdaptiveViT
 Adaptive Distribution-aware Vision Transformer, **AdaptiveViT** is a hybrid CNN-Vision Transformer model designed for medical image classification under severe class imbalance and low-resolution image data.
 
+
+**Paper:** [Adaptive distribution-aware transformer for multi-scale visual representation learning on imbalanced and low-resolution data](https://doi.org/10.1016/j.media.2026.104162)
+
+
 # Citation
-Please consider citing our paper.
+Please consider citing our **[paper](https://doi.org/10.1016/j.media.2026.104162)**.
 ```
 @article{ahammed2026adaptive,
   title={Adaptive distribution-aware transformer for multi-scale visual representation learning on imbalanced and low-resolution data},
