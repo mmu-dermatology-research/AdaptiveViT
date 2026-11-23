@@ -140,3 +140,4 @@ AdaptiveViT is evaluated on publicly available medical imaging benchmarks, prima
 
 ---
 > **Note:** See `datasets/README.md` for a detailed description of the dataset modules and the common dataset module interface.
+> The CSV files containing the subsets sample IDs used in our experiments for **ISIC 2024**, **ISIC Imbalanced**, and **HyperKvasir UC** are available in [`data/`](./data/). Please download the corresponding datasets using the links in the table above.
