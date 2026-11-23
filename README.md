@@ -5,12 +5,13 @@ Adaptive Distribution-aware Vision Transformer, **AdaptiveViT** is a hybrid CNN-
 Please consider citing our paper. The online version is coming soon.
 ```
 @article{ahammed2026adaptive,
- title   = {Adaptive Distribution-aware Transformer for Multi-Scale Visual Representation Learning on Imbalanced and Low-Resolution Data},
- author  = {Ahammed, Sakib and Cui, Xia and Lu, Wenqi and Yap, Moi Hoon},
- journal = {Medical Image Analysis},
- year    = {2026},
- note    = {In press}
-} 
+  title={Adaptive distribution-aware transformer for multi-scale visual representation learning on imbalanced and low-resolution data},
+  author={Ahammed, Sakib and Cui, Xia and Lu, Wenqi and Yap, Moi Hoon},
+  journal={Medical Image Analysis},
+  pages={104162},
+  year={2026},
+  publisher={Elsevier}
+}
 ```
 
 ## Installation
@@ -127,14 +128,15 @@ CUDA_VISIBLE_DEVICES=0 python predict.py \
 
 AdaptiveViT is evaluated on publicly available medical imaging benchmarks, primarily for skin lesion classification, with an additional HyperKvasirUC endoscopy dataset used to assess its generalisation capability across imaging domains.
 
-| Dataset| Tag | Task (Binary or Multi-class) | Classes | Imbalance |
-|---|---|---|---|---|
-| **ISIC 2017** | `ISIC2017` | Skin lesion (binary / 3-class) | 2 or 3 | ~4.4:1 |
-| **ISIC 2024** | `ISIC2024` | Skin lesion (binary) | 2 | ~9.7:1 |
-| **ISIC Balanced** | `CBD4905` | Melanoma detection | 2 | ~1:1 (balanced) |
-| **ISIC Imbalanced** | `IMBD9810` | A subset of ISIC-DICM-17K Melanoma detection | 2 | ~1.7:1 |
-| **Derm7pt** | `Derm7pt`, `Derm7ptClinic` | Dermoscopy / clinical (binary / 5-class) | 2 or 5 | ~3.6:1 |
-| **HyperKvasir UC** | `IBDHKUC` | Ulcerative colitis (Mayo score) | 2 | ~5.4:1 |
+| Dataset | Tag | Task (Binary or Multi-class) | Classes | Imbalance Ratio | Dataset Download |
+|---|---|---|---|---|---|
+| **ISIC 2017** | `ISIC2017` | Skin lesion (binary / 3-class) | 2 or 3 | ~4.4:1 | [ISIC 2017](https://challenge.isic-archive.com/data/#2017) |
+| **ISIC 2024** | `ISIC2024` | Skin lesion (binary) | 2 | ~9.7:1 | [ISIC 2024](https://challenge.isic-archive.com/data/#2024) |
+| **ISIC Balanced** | `CBD4905` | Melanoma detection | 2 | ~1:1 (balanced) | [ISIC Balanced](https://api.isic-archive.com/collections/470/) |
+| **ISIC Imbalanced** | `IMBD9810` | A subset of ISIC-DICM-17K (melanoma detection) | 2 | ~1.7:1 | [ISIC-DICM-17K](https://github.com/mmu-dermatology-research/isic-dicm-17k) |
+| **Derm7pt** | `Derm7pt`, `Derm7ptClinic` | Dermoscopy / clinical (binary / 5-class) | 2 or 5 | ~3.6:1 | [Derm7pt](https://github.com/jeremykawahara/derm7pt) |
+| **HyperKvasir UC** | `IBDHKUC` | Ulcerative colitis (Mayo score) | 2 | ~5.4:1 | [HyperKvasir](https://github.com/simula/hyper-kvasir) |
+
 
 ---
 > **Note:** See `datasets/README.md` for a detailed description of the dataset modules and the common dataset module interface.
